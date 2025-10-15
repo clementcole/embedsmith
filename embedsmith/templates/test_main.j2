@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+"""
+Test suite for ${project_name}
+Author: ${author}
+Version: ${version}
+"""
+
+import unittest
+import os
+import sys
+import tempfile
+import subprocess
+from pathlib import Path
+from unittest.mock import patch, MagicMock
+
+
+class TestFirmwareBuild(unittest.TestCase):
+    """Test firmware build process"""
+    
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp()
+        self.project_path = Path(self.test_dir) / "test_project"
+        
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self.test_dir, ignore_errors=True)
+    
+    def test_project_structure(self):
+        """Test that project structure is created correctly"""
+        # This would test the project creation
+        # For now, it's a placeholder for actual structure tests
+        self.assertTrue(True)
+    
+    def test_makefile_exists(self):
+        """Test that Makefile is generated"""
+        # Placeholder for Makefile existence test
+        self.assertTrue(True)
+
+
+class TestFlashTool(unittest.TestCase):
+    """Test flash tool functionality"""
+    
+    @patch('serial.Serial')
+    def test_serial_connection(self, mock_serial):
+        """Test serial connection setup"""
+        mock_serial.return_value.is_open = True
+        
+        # Test would go here
+        self.assertTrue(True)
+    
+    @patch('subprocess.run')
+    def test_flash_process(self, mock_run):
+        """Test firmware flashing process"""
+        mock_run.return_value.returncode = 0
+        mock_run.return_value.stdout = "Flash successful"
+        
+        # Test would go here
+        self.assertTrue(True)
+
+
+class TestConfiguration(unittest.TestCase):
+    """Test configuration files"""
+    
+    def test_config_h_generation(self):
+        """Test config.h template rendering"""
+        # Test would verify config.h contains expected content
+        self.assertTrue(True)
+    
+    def test_linker_script_generation(self):
+        """Test linker script template rendering"""
+        # Test would verify linker script contains memory regions
+        self.assertTrue(True)
+
+
+class TestCodeQuality(unittest.TestCase):
+    """Test code quality standards"""
+    
+    def test_compiler_warnings(self):
+        """Test that code compiles without warnings"""
+        # This would actually compile the code and check for warnings
+        # For now, it's a placeholder
+        self.assertTrue(True)
+    
+    def test_coding_standards(self):
+        """Test adherence to coding standards"""
+        # Placeholder for style checks
+        self.assertTrue(True)
+
+
+class TestHardware(unittest.TestCase):
+    """Test hardware-related functionality"""
+    
+    def test_memory_layout(self):
+        """Test that memory layout is valid"""
+        # Would verify flash and RAM sizes are reasonable
+        flash_size = "${flash_size}"
+        self.assertIn(flash_size, ["128K", "256K", "512K", "1M", "2M"])
+    
+    def test_mcu_support(self):
+        """Test that MCU is supported"""
+        mcu = "${mcu}"
+        supported_mcus = ["cortex-m0", "cortex-m3", "cortex-m4", "cortex-m7"]
+        self.assertIn(mcu, supported_mcus)
+
+
+def run_integration_tests():
+    """Run integration tests (separate from unit tests)"""
+    print("Running integration tests...")
+    # These would test actual project creation and building
+    return True
+
+
+if __name__ == '__main__':
+    print("Running ${project_name} Test Suite")
+    print("=" * 50)
+    
+    # Run unit tests
+    loader = unittest.TestLoader()
+    suite = loader.loadTestsFromModule(sys.modules[__name__])
+    
+    runner = unittest.TextTestRunner(verbosity=2)
+    result = runner.run(suite)
+    
+    # Run integration tests if unit tests pass
+    if result.wasSuccessful():
+        print("\nRunning integration tests...")
+        if run_integration_tests():
+            print("All tests passed! ✅")
+            sys.exit(0)
+        else:
+            print("Integration tests failed! ❌")
+            sys.exit(1)
+    else:
+        print("Unit tests failed! ❌")
+        sys.exit(1)

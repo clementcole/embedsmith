@@ -1,0 +1,147 @@
+
+### `embedded_project_creator/templates/gitignore.j2`
+
+```gitignore
+# Build artifacts
+firmware/build/
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+*.o
+*.d
+*.su
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug files
+*.dSYM/
+*.su
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Project specific
+# Hardware design files (if using EDA tools)
+*.sch
+*.brd
+*.kicad_pcb
+*.kicad_sch
+*.pro
+*.kicad_dru
+
+# Documentation
+docs/_build/
+
+# Backup files
+*~
+*.bak
+*.backup
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Project configuration (can be regenerated)
+project_config.json
+
+# Tool-specific files
+# OpenOCD
+openocd.log
+
+# Segger J-Link
+JLink.log
+JLinkSettings.ini

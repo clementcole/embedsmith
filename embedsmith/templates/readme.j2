@@ -1,0 +1,121 @@
+# ${project_name}
+
+Embedded firmware project for ${mcu} microcontroller.
+
+## Project Information
+
+- **Author**: ${author}
+- **Version**: ${version}
+- **MCU**: ${mcu}
+- **Compiler**: ${compiler}
+- **Flash**: ${flash_size}
+- **RAM**: ${ram_size}
+
+## Project Structure
+${project_name}/
+├── firmware/
+│ ├── src/ # Source files (.c, .cpp)
+│ ├── include/ # Header files (.h)
+│ ├── linker_scripts/ # Memory configuration
+│ ├── build/ # Build artifacts (generated)
+│ └── Makefile # Build system
+├── tools/
+│ ├── scripts/ # Utility scripts
+│ └── configs/ # Tool configurations
+├── tests/ # Test files
+├── docs/ # Documentation
+├── hardware/ # Hardware designs
+└── project_config.json # Project configuration
+
+## Getting Started
+
+### Prerequisites
+
+- ${compiler} toolchain
+- Make build system
+- OpenOCD (for flashing/debugging)
+- Python 3.7+ (for tools)
+
+### Building
+
+```bash
+cd firmware
+make all
+
+
+### Flashing 
+```bash 
+cd firmware
+make flash 
+```
+Or using the flash tool:
+```bash 
+python tools/scripts/flash_tool.py firmware/build/${project_name}.elf
+```
+
+### Debugging
+1. Start OpenOCD:
+```bash 
+openocd -f tools/configs/debug_config.json
+```
+
+2. Connect with GDB:
+```bash 
+${compiler}-gdb firmware/build/${project_name}.elf
+```
+
+### Configuration 
+
+#### Memory Layout 
+-   Flash: ${flash_size} start at ${flash_start} 
+-   RAM: ${ram_size} start at ${ram_start} 
+
+Edit `firmware/linker_scripts/linker_script.ld` to modify memory regions.
+
+
+---
+### Build Options 
+Edit firmware/Makefile to customize:
+-   Compiler flags
+-   Source files
+-   Include paths
+-   Linker options
+
+---
+### Project Settings 
+Edit project_config.json to update:
+-   MCU type
+-   Memory sizes
+-   Toolchain settings
+
+### Development
+
+####    Adding Source Files
+1. Place .c files in firmware/src/
+2. Place .h files in firmware/include/
+3. The Makefile will automatically include them
+
+####    Adding Tests 
+1. Add test files to tests/ directory
+2. Follow naming convention test_*.py
+3. Run tests with: python -m pytest tests/
+
+
+####    Code Style
+-   Follow MISRA C guidelines for safety-critical code
+-   Use descriptive variable and function names
+-   Add Doxygen-style comments for public APIs
+-   Keep functions small and focused
+
+
+### Debugging Tips
+####    Common Issues
+1.  Linker errors: Check memory sizes in linker script
+2.  Hard faults: Verify stack and heap sizes
+3.  Peripheral issues: Check clock configuration and pin mappings
+
+####    Debug Tools
+-   OpenOCD: JTAG/SWD debugging
+-   GDB: Source-level debugging
+-   Serial monitor: Printf debugging
+-   Logic analyzer: Signal analysis

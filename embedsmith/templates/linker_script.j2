@@ -1,0 +1,125 @@
+/**
+ * Linker script for ${mcu}
+ * Project: ${project_name}
+ * Flash: ${flash_size} at ${flash_start}
+ * RAM: ${ram_size} at ${ram_start}
+ */
+
+MEMORY
+{
+    FLASH (rx)  : ORIGIN = ${flash_start}, LENGTH = ${flash_size}
+    RAM (rwx)   : ORIGIN = ${ram_start}, LENGTH = ${ram_size}
+}
+
+/* Entry Point */
+ENTRY(Reset_Handler)
+
+/* Define stack size and heap size */
+_Min_Heap_Size = 0x200;  /* Required amount of heap */
+_Min_Stack_Size = 0x400; /* Required amount of stack */
+
+/* Sections */
+SECTIONS
+{
+    /* Interrupt vector table */
+    .isr_vector :
+    {
+        . = ALIGN(4);
+        KEEP(*(.isr_vector))
+        . = ALIGN(4);
+    } >FLASH
+
+    /* Program code and read-only data */
+    .text :
+    {
+        . = ALIGN(4);
+        *(.text)
+        *(.text*)
+        *(.glue_7)
+        *(.glue_7t)
+        *(.eh_frame)
+        
+        KEEP (*(.init))
+        KEEP (*(.fini))
+        
+        . = ALIGN(4);
+        _etext = .;
+    } >FLASH
+
+    /* Constant data */
+    .rodata :
+    {
+        . = ALIGN(4);
+        *(.rodata)
+        *(.rodata*)
+        . = ALIGN(4);
+    } >FLASH
+
+    /* ARM sections */
+    .ARM.extab :
+    {
+        *(.ARM.extab* .gnu.linkonce.armextab.*)
+    } >FLASH
+    
+    .ARM :
+    {
+        __exidx_start = .;
+        *(.ARM.exidx*)
+        __exidx_end = .;
+    } >FLASH
+
+    /* Initialized data */
+    _sidata = .;
+    .data : AT ( _sidata )
+    {
+        . = ALIGN(4);
+        _sdata = .;
+        *(.data)
+        *(.data*)
+        . = ALIGN(4);
+        _edata = .;
+    } >RAM
+
+    /* Uninitialized data */
+    .bss :
+    {
+        . = ALIGN(4);
+        _sbss = .;
+        *(.bss)
+        *(.bss*)
+        *(COMMON)
+        . = ALIGN(4);
+        _ebss = .;
+    } >RAM
+
+    /* Heap */
+    .heap :
+    {
+        . = ALIGN(4);
+        _heap_start = .;
+        . = . + _Min_Heap_Size;
+        . = ALIGN(4);
+        _heap_end = .;
+    } >RAM
+
+    /* Stack */
+    .stack :
+    {
+        . = ALIGN(4);
+        _stack_start = .;
+        . = . + _Min_Stack_Size;
+        . = ALIGN(4);
+        _stack_end = .;
+    } >RAM
+
+    /* Remove information from the standard libraries */
+    /DISCARD/ :
+    {
+        libc.a ( * )
+        libm.a ( * )
+        libgcc.a ( * )
+    }
+
+    /* Define symbols for initialization */
+    _end = .;
+}
