@@ -2,7 +2,7 @@ import pytest
 import tempfile
 import shutil
 from pathlib import Path
-from embedsmith import EmbedSmith, ProjectConfig
+from embedsmith import embedsmith, ProjectConfig
 
 
 class TestEmbeddedProjectCreator:
@@ -75,3 +75,4 @@ class TestEmbeddedProjectCreator:
             "docs/README.md",
             ".gitignore",
             "project_config.json"
+        ]
