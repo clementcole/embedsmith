@@ -117,7 +117,7 @@ def main():
     )
     
     parser.add_argument(
-        "--list-presets",
+        "--list-presets","-l",
         action="store_true",
         help="List available MCU presets and exit"
     )

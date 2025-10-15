@@ -31,7 +31,7 @@ class FlashTool:
             possible_ports = [f'COM{i}' for i in range(1, 21)]
         elif sys.platform.startswith('linux'):
             possible_ports = [f'/dev/ttyUSB{i}' for i in range(10)] + \
-                           [f'/dev/ttyACM{i}' for i in range(10)]
+                            [f'/dev/ttyACM{i}' for i in range(10)]
         elif sys.platform.startswith('darwin'):  # macOS
             possible_ports = [f'/dev/tty.usbserial-*', f'/dev/tty.usbmodem*']
         
