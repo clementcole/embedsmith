@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "embedsmith"
+version = "1.0.0"
+description = "A tool to create standardized embedded project layouts"
+authors = [
+    {name = "Clem Cole (ClemChowder)", email = "clementacole75@gmail.com"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Embedded Systems",
+    "Topic :: Software Development :: Code Generators",
+]
+requires-python = ">=3.7"
+dependencies = []
+
+[project.scripts]
+embedsmith = "embedsmith.cli:main"
+es = "embedsmith.cli:main"
+
+[project.urls]
+"Homepage" = "https://github.com/clementcole/embedsmith"
+"Bug Reports" = "https://github.com/clementcole/embedsmith"
+"Source" = "https://github.com/clementcole/embedsmith.git"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["embedsmith*"]
+
+[tool.setuptools.package-data]
+"embedsmith.templates" = ["*.j2"]
+
+[tool.black]
+line-length = 88
+target-version = ['py37', 'py38', 'py39', 'py310']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.7"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--verbose --color=yes --cov=embedded_project_creator --cov-report=html --cov-report=term-missing"
